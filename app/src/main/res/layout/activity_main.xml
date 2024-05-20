@@ -5,66 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사이드바 추가 예정"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
         <Button
             android:id="@+id/mainBtn"
-            android:layout_width="82sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="학과공지"
-            android:textSize="9sp"
             android:textStyle="bold"
+            android:textSize="12sp"
             app:cornerRadius="0dp"
-            android:background="#FF7B8D93"
+            android:background="@color/Selected_Button"
             android:textColor="@color/black"/>
-
 
         <Button
             android:id="@+id/calender"
-            android:layout_width="82sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시간표"
-            android:textSize="9sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:cornerRadius="0dp"
-            android:background="#A2D0E4"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
 
         <Button
             android:id="@+id/schedule"
-            android:layout_width="82sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="일정"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:cornerRadius="0dp"
-            android:background="#FFCFD8DC"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
         <Button
             android:id="@+id/studyManage"
-            android:layout_width="82sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="공부관리"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:cornerRadius="0dp"
-            android:background="#FFCFD8DC"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
         <Button
             android:id="@+id/community"
-            android:layout_width="82sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="커뮤니티"
-            android:textSize="9sp"
+            android:textSize="12sp"
             app:cornerRadius="0dp"
-            android:background="#FFCFD8DC"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
     </LinearLayout>
 
 </LinearLayout>
