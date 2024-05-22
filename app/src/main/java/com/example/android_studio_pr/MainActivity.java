@@ -22,8 +22,15 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "실행됨", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, Dept_Announce.class);
+                startActivity(intent);
+            }
+        });
+        Button registerBtn = (Button)findViewById(R.id.registerBtn);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Register.class);
                 startActivity(intent);
             }
         });
