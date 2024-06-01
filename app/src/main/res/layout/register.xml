@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time Calender"
+        android:textSize="50sp"
+        android:layout_marginTop="50sp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가입하기"
+        android:textSize="40sp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="350sp"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        android:layout_marginTop="50sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30sp"
+        android:textSize="40sp"
+        android:background="@color/Selected_Button"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="350sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30sp"
+        android:background="@color/Selected_Button"
+        android:hint="PW"
+        android:textColor="@color/black"
+        android:textSize="40sp" />
+
+    <EditText
+        android:layout_width="350sp"
+        android:layout_height="wrap_content"
+        android:hint="닉네임"
+        android:layout_gravity="center"
+        android:textSize="40sp"
+        android:background="@color/Selected_Button"
+        android:textColor="@color/black"/>
+
+    <Spinner
+        android:id="@+id/deptSpinner"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@color/UnSelected_Button"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80sp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50sp"
+            android:text="가입하기"
+            android:textSize="30sp"
+            android:background="@color/Selected_Button"/>
+        <Button
+            android:id="@+id/registerCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100sp"
+            android:text="돌아가기"
+            android:textSize="30sp"
+            android:background="@color/Selected_Button"/>
+    </LinearLayout>
+
+
+</LinearLayout>
