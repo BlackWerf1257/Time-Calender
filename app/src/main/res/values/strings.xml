@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Android_Studio_Pr</string>
+    <string name="register">회원가입</string>
+    <string name="Department">학부</string>
+    <string name="Undo">취소하기</string>
+    <string name="Register">가입하기</string>
+    <string name="idText">ID</string>
+    <string name="pwText">PW</string>
+    <string name="userName">닉네임</string>
+    <string name="password">비밀번호</string>
+    <string name="id">ID</string>
+    <string name="timerStart">타이머 시작</string>
+    <string name="timerPause">타이머 정지</string>
 </resources>
