@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/mainBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="학과공지"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            app:cornerRadius="0dp"
+            android:background="@color/UnSelected_Button"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/calender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간표"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cornerRadius="0dp"
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
+
+        <Button
+            android:id="@+id/schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="일정"
+            android:textSize="12sp"
+            app:cornerRadius="0dp"
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
+        <Button
+            android:id="@+id/studyManage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="공부관리"
+            android:textSize="12sp"
+            app:cornerRadius="0dp"
+            android:textColor="@color/black"
+            android:background="@color/Selected_Button"/>
+        <Button
+            android:id="@+id/community"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="커뮤니티"
+            android:textSize="12sp"
+            app:cornerRadius="0dp"
+            android:textColor="@color/black"
+            android:background="@color/UnSelected_Button"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_marginTop="50sp"
+        android:layout_gravity="center"
+        android:background="@color/black"/>
+
+
+    <LinearLayout
+        android:id="@+id/timeCountSettingLV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/startBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50sp">
+
+        <EditText
+            android:id="@+id/hourET"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text=":"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/startBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/minuteET"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text=":"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/startBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/secondET"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="40sp"
+            android:textSize="40sp"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp">
+        <Switch
+            android:id="@+id/soundOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SoundOn"
+            android:textSize="30sp"
+            android:layout_marginStart="30sp"
+            android:textColor="@color/black"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+        <Switch
+            android:id="@+id/vibrationOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80sp"
+            android:textSize="30sp"
+            android:text="@string/VibrationOn"
+            android:scrollbarSize="30sp"
+            android:textColor="@color/black"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200sp">
+        <Button
+            android:id="@+id/countDownStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25sp"
+            android:text="@string/timerStart"
+            android:textSize="30sp"/>
+        <Button
+            android:id="@+id/countDownPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:text="@string/timerPause"
+            android:textSize="30sp"/>
+    </LinearLayout>
+</LinearLayout>

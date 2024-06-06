@@ -1,86 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time Calender"
-        android:textSize="50sp"
-        android:layout_marginTop="50sp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textSize="80sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
+
+    <EditText
+            android:id="@+id/idField"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="center"
+            android:background="@color/UnSelected_Button"
+            android:textSize="40sp"
+            android:hint="@string/id"
+            android:layout_marginTop="30sp"
+            android:textColor="@color/black"/>
+
+    <EditText
+            android:id="@+id/pwField"
+            android:text=""
+            android:layout_marginTop="30sp"
+            android:textSize="40sp"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:background="@color/UnSelected_Button"
+            android:layout_gravity="center"
+            android:hint="@string/password"
+            android:textColor="@color/black"/>
+
+    <EditText
+            android:id="@+id/userNameField"
+            android:text=""
+            android:layout_marginTop="30sp"
+            android:textSize="40sp"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:background="@color/UnSelected_Button"
+            android:layout_gravity="center"
+            android:hint="@string/userName"
+            android:textColor="@color/black"/>
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="가입하기"
-        android:textSize="40sp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"/>
-
-    <EditText
-        android:layout_width="350sp"
-        android:layout_height="wrap_content"
-        android:hint="ID"
-        android:layout_marginTop="50sp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30sp"
-        android:textSize="40sp"
-        android:background="@color/Selected_Button"
-        android:textColor="@color/black"/>
-
-    <EditText
-        android:layout_width="350sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30sp"
-        android:background="@color/Selected_Button"
-        android:hint="PW"
-        android:textColor="@color/black"
-        android:textSize="40sp" />
-
-    <EditText
-        android:layout_width="350sp"
-        android:layout_height="wrap_content"
-        android:hint="닉네임"
-        android:layout_gravity="center"
-        android:textSize="40sp"
-        android:background="@color/Selected_Button"
-        android:textColor="@color/black"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Department"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="50sp"/>
 
     <Spinner
-        android:id="@+id/deptSpinner"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@color/UnSelected_Button"/>
+            android:id="@+id/deptSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="80sp"
+            android:layout_marginTop="50sp"
+            android:background="@color/Selected_Button"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80sp"
-        android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="30sp">
         <Button
-            android:id="@+id/registerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50sp"
-            android:text="가입하기"
-            android:textSize="30sp"
-            android:background="@color/Selected_Button"/>
+                android:id="@+id/registerBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:text="@string/Register"
+                android:textSize="40sp"
+                android:textColor="@color/black"
+                android:background="#f05924"/>
         <Button
-            android:id="@+id/registerCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100sp"
-            android:text="돌아가기"
-            android:textSize="30sp"
-            android:background="@color/Selected_Button"/>
+                android:id="@+id/registerUndoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:text="@string/Undo"
+                android:textSize="40sp"
+                android:textColor="@color/black"
+                android:background="#f05924"/>
     </LinearLayout>
-
-
 </LinearLayout>
