@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -80,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@+id/startBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +95,7 @@
             android:hint="00"
             android:gravity="center"
             android:textColor="@color/black"
+            android:textSize="30sp"
             android:layout_height="wrap_content"
             android:inputType="number"/>
 
@@ -118,6 +120,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
+            android:textSize="40sp"
             android:inputType="number"/>
 
         <TextView
@@ -141,6 +144,8 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
+            android:scrollbarSize="40sp"
+            android:textSize="40sp"
             android:inputType="number"/>
     </LinearLayout>
 
@@ -152,18 +157,21 @@
             android:id="@+id/soundOn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="소리 On"
-            android:textSize="25sp"
-            android:layout_marginStart="40sp"
-            android:textColor="@color/black"/>
+            android:text="@string/SoundOn"
+            android:textSize="30sp"
+            android:layout_marginStart="30sp"
+            android:textColor="@color/black"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
         <Switch
-            android:id="@+id/VibrationOn"
+            android:id="@+id/vibrationOn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80sp"
-            android:textSize="25sp"
-            android:text="진동 On"
-            android:textColor="@color/black"/>
+            android:textSize="30sp"
+            android:text="@string/VibrationOn"
+            android:scrollbarSize="30sp"
+            android:textColor="@color/black"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
     </LinearLayout>
 
 

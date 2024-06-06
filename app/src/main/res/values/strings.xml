@@ -11,4 +11,6 @@
     <string name="id">ID</string>
     <string name="timerStart">타이머 시작</string>
     <string name="timerPause">타이머 정지</string>
+    <string name="VibrationOn">진동 On</string>
+    <string name="SoundOn">소리 On</string>
 </resources>
