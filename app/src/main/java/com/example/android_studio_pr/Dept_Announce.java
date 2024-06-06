@@ -24,7 +24,6 @@ public class Dept_Announce extends AppCompatActivity {
         topButton[3] = (Button) findViewById(R.id.studyManage);
         topButton[4] = (Button) findViewById(R.id.community);
 
-
         topButton[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
