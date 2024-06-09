@@ -31,6 +31,7 @@ import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity {
     static String loginResult, userName, deptName;
+    AlertDialog.Builder alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         EditText idField, pwField;
 
+        alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle(R.string.error);
+        alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
+
         idField = findViewById(R.id.idField);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                pwField = findViewById(R.id.pwField);
+        pwField = findViewById(R.id.pwField);
 
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
         Button registerBtn = (Button)findViewById(R.id.registerBtn);
@@ -54,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 String pw = pwField.getText().toString().trim();
 
                 if (id.isEmpty() || pw.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "값을 입력해주세요", Toast.LENGTH_SHORT).show();
+                    alertDialog.setMessage(R.string.noInfo);
+                    alertDialog.show();
                     return;
                 }
                 else
@@ -119,9 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-                alertDialog.setTitle(R.string.error);
-                alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
+
                 alertDialog.setMessage(R.string.noIdorPw);
                 alertDialog.show();
             }

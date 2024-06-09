@@ -16,4 +16,5 @@
     <string name="timer_default_text">00</string>
     <string name="error">오류</string>
     <string name="noIdorPw">ID나 비밀번호가 일치하지않습니다\n다시 입력해주세요</string>
+    <string name="noInfo">ID와 비밀번호를 입력해주세요</string>
 </resources>
