@@ -26,6 +26,7 @@ public class ScheduleFragment extends Fragment {
     private Button editMemoButton;
     private Map<String, String> memoMap = new HashMap<>();
     private String selectedDate;
+    AlertDialog.Builder alertDialog;
 
     @Nullable
     @Override
@@ -36,6 +37,12 @@ public class ScheduleFragment extends Fragment {
         memoTextView = view.findViewById(R.id.memoTextView);
         viewMemoButton = view.findViewById(R.id.viewMemoButton);
         editMemoButton = view.findViewById(R.id.editMemoButton);
+
+
+        alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle(R.string.error);
+        alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
+
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

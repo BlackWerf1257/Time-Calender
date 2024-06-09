@@ -80,7 +80,7 @@
                 android:text="@string/Register"
                 android:textSize="40sp"
                 android:textColor="@color/black"
-                android:background="#f05924"/>
+                android:background="@color/Avaliable_Button"/>
         <Button
                 android:id="@+id/registerUndoBtn"
                 android:layout_width="wrap_content"
@@ -89,6 +89,6 @@
                 android:text="@string/Undo"
                 android:textSize="40sp"
                 android:textColor="@color/black"
-                android:background="#f05924"/>
+            android:background="@color/Avaliable_Button"/>
     </LinearLayout>
 </LinearLayout>
