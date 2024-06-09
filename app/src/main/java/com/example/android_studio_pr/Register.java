@@ -35,6 +35,8 @@ public class Register extends AppCompatActivity {
     static int dropdownSelectedIdx = 0;
     static EditText idField, pwField, userName;
     static ProgressDialog progresssBar;
+
+    AlertDialog.Builder alertDialog;
     static String[] deptArr = {"기독교학부", "어문학부", "사회복지학부", "경찰학부", "경상학부", "관광학부", "사범학부",
             "유아교육과", "특수교육과", "유아특수교육과", "특수체육교육과", "컴퓨터공학부", "보건학부", "물리치료학과",
             "안경광학과", "응급구조학과", "간호학과", "치위생학과", "작업치료학과", "디자인영상학부", "스포츠과학부",
@@ -44,6 +46,12 @@ public class Register extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.register);
         super.onCreate(savedInstanceState);
+
+        alertDialog = new AlertDialog.Builder(Register.this);
+        alertDialog.setTitle(R.string.error);
+        alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
+
+
         Button registerBtn, undoBtn;
         Spinner spinner;
 
@@ -84,7 +92,7 @@ public class Register extends AppCompatActivity {
                         values.put("id", id);
                         values.put("pw", pw);
                         values.put("userName", userNameValue);
-                        values.put("deptName", deptArr[dropdownSelectedIdx]);
+                        values.put("deptName", deptArr[dropdownSelectedIdx].toString());
                         Register.HttpUtil netTask = new Register.HttpUtil(SiteUrl.RegisterUrl, values);
                         netTask.execute();
                     }
@@ -149,9 +157,7 @@ public class Register extends AppCompatActivity {
             progresssBar.dismiss();
             if(!result.isEmpty())
             {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Register.this);
-                alertDialog.setTitle(R.string.error);
-                alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
+
                 alertDialog.setMessage(result);
                 alertDialog.show();
             }
