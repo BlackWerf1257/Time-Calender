@@ -163,7 +163,11 @@ public class Register extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                alertDialog.setTitle(R.string.registerSucceed);
+                if(result.equals("계정이 생성되었습니다"))
+                    alertDialog.setTitle(R.string.registerSucceed);
+                else
+                    alertDialog.setTitle(R.string.registerFailed);
+
                 alertDialog.setMessage(result);
                 alertDialog.show();
             }
