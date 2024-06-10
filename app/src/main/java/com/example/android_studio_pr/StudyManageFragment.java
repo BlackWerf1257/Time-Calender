@@ -32,6 +32,8 @@ public class StudyManageFragment extends Fragment {
     Ringtone ringtone;
     Vibrator vibrator;
 
+    AlertDialog.Builder builder;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class StudyManageFragment extends Fragment {
             }
         });
 
+        builder = new AlertDialog.Builder(getActivity());
+        builder.setIcon(android.R.drawable.ic_lock_idle_alarm);
+
         return view;
     }
 
@@ -64,7 +69,10 @@ public class StudyManageFragment extends Fragment {
         if (!isTimerRunning) {
             String input = editTextTimer.getText().toString();
             if (input.isEmpty()) {
-                Toast.makeText(getActivity(), "Please enter a time", Toast.LENGTH_SHORT).show();
+                builder.setTitle("경고")
+                        .setMessage("시간을 입력해주세요");
+                builder.show();
+
                 return;
             }
 
@@ -147,7 +155,7 @@ public class StudyManageFragment extends Fragment {
         }
 
         // 알림 창 표시
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         builder.setTitle("시간 경과")
                 .setMessage("설정한 시간이 지났습니다")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
