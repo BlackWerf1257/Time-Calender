@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150sp"
+        android:background="#C5E2EF"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/todayDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="10sp"
+            android:textSize="30sp"
+            android:text="OOOO-OO-OO(X요일)" />
+
+        <TextView
+            android:id="@+id/userNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="이름"
+            android:textColor="@color/black"
+            android:layout_marginTop="10sp"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/userDeptNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="10sp"
+            android:textSize="20sp"
+            android:text="학과" />
+
+    </LinearLayout>
+
+    <!-- 다음 수업 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/moveToSchoolSite"
+            android:layout_width="350sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="10sp"
+            android:text="학교 홈페이지로 이동하기"
+            android:background="@drawable/button_layout"
+            android:textColor="@color/Button_Text_Color"
+            android:textSize="30sp"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/moveToDeptSite"
+            android:layout_width="350sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/Button_Text_Color"
+            android:text="학과 사이트로 이동하기"
+            android:background="@drawable/button_layout"
+            android:textSize="30sp"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/moveToCybercampus"
+            android:layout_width="350sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/Button_Text_Color"
+            android:background="@drawable/button_layout"
+            android:text="사이버캠퍼스로 이동하기"
+            android:textSize="30sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+</LinearLayout>
