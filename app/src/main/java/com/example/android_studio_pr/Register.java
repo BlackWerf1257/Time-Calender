@@ -48,7 +48,6 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         alertDialog = new AlertDialog.Builder(Register.this);
-        alertDialog.setTitle(R.string.error);
         alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
 
 
@@ -77,25 +76,25 @@ public class Register extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    String id = idField.getText().toString().trim();
-                    String pw = pwField.getText().toString().trim();
-                    String userNameValue = userName.getText().toString().trim();
+                String id = idField.getText().toString().trim();
+                String pw = pwField.getText().toString().trim();
+                String userNameValue = userName.getText().toString().trim();
 
-                    if (id.isEmpty() || pw.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "값을 입력해주세요", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    else
-                    {
-                        progresssBar.show();
-                        ContentValues values = new ContentValues();
-                        values.put("id", id);
-                        values.put("pw", pw);
-                        values.put("userName", userNameValue);
-                        values.put("deptName", deptArr[dropdownSelectedIdx].toString());
-                        Register.HttpUtil netTask = new Register.HttpUtil(SiteUrl.RegisterUrl, values);
-                        netTask.execute();
-                    }
+                if (id.isEmpty() || pw.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "값을 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else
+                {
+                    progresssBar.show();
+                    ContentValues values = new ContentValues();
+                    values.put("id", id);
+                    values.put("pw", pw);
+                    values.put("userName", userNameValue);
+                    values.put("deptName", deptArr[dropdownSelectedIdx].toString());
+                    Register.HttpUtil netTask = new Register.HttpUtil(SiteUrl.RegisterUrl, values);
+                    netTask.execute();
+                }
             }
         });
         undoBtn.setOnClickListener(new View.OnClickListener() {
@@ -152,13 +151,25 @@ public class Register extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
             // 결과에 따른 UI 수정
             progresssBar.dismiss();
             if(!result.isEmpty())
             {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    result = jsonObject.getString("result");
+                    // 이제 'name' 변수를 사용할 수 있습니다.
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+                alertDialog.setTitle(R.string.registerSucceed);
                 alertDialog.setMessage(result);
+                alertDialog.show();
+            }
+            else{
+                alertDialog.setTitle(R.string.error);
+                alertDialog.setMessage(R.string.registerFailed);
                 alertDialog.show();
             }
         }
