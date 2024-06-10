@@ -44,8 +44,8 @@
         }
         else
         {
-            //$add_res["result"] = "계정 생성에 실패했습니다";
-            echo json_encode('계정 생성 실패', JSON_UNESCAPED_UNICODE);
+            $add_res["result"] = "계정 생성에 실패했습니다";
+            echo json_encode($add_res, JSON_UNESCAPED_UNICODE);
         }
 }
       $conn->close();
