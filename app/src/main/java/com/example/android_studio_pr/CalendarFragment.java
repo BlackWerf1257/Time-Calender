@@ -43,6 +43,12 @@ public class CalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
         timetableGrid = view.findViewById(R.id.timetableGrid);
 
+        ContentValues values = new ContentValues();
+        values.put("userName", "AA");
+        values.put("needFetch", "true");
+        CalendarFragment.HttpUtil task = new CalendarFragment.HttpUtil(SiteUrl.CalenderUrl, values);
+        task.execute();
+
         populateTimetable();
 
         progressBar = new ProgressDialog(getContext());
@@ -207,29 +213,16 @@ public class CalendarFragment extends Fragment {
         protected void onPostExecute(String result) {
             // 결과에 따른 UI 수정
             progressBar.dismiss();
-            if(!result.isEmpty())
-            {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    result = jsonObject.getString("result");
-                    // 이제 'name' 변수를 사용할 수 있습니다.
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                result = jsonObject.getString("result");
 
-                if(result.equals("계정이 생성되었습니다"))
-                    alertDialog.setTitle(R.string.registerSucceed);
-                else
-                    alertDialog.setTitle(R.string.registerFailed);
+                // 이제 'name' 변수를 사용할 수 있습니다.
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-                alertDialog.setMessage(result);
-                alertDialog.show();
-            }
-            else{
-                alertDialog.setTitle(R.string.error);
-                alertDialog.setMessage(R.string.registerFailed);
-                alertDialog.show();
-            }
+            Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
         }
     }
 }
