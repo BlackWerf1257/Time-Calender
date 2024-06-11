@@ -14,9 +14,17 @@
     <string name="VibrationOn">진동 On</string>
     <string name="SoundOn">소리 On</string>
     <string name="timer_default_text">00</string>
+    <string name="succeed">성공</string>
     <string name="error">오류</string>
     <string name="noIdorPw">ID나 비밀번호가 일치하지않습니다\n다시 입력해주세요</string>
     <string name="noInfo">ID와 비밀번호를 입력해주세요</string>
     <string name="registerFailed">회원가입에 실패했습니다</string>
     <string name="registerSucceed">회원가입에 성공했습니다</string>
+    <string name="noDate">날짜를 선택해주세요</string>
+    <string name="memoAdd">메모 추가</string>
+    <string name="memoAdded">메모가 추가되었습니다</string>
+    <string name="add">추가</string>
+    <string name="cancel">취소</string>
+    <string name="memoUpdated">메모가 수정되었습니다</string>
+    <string name="memoUpdateTitle">메모 수정</string>
 </resources>

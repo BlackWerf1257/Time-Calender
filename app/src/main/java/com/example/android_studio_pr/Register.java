@@ -32,9 +32,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
-    static int dropdownSelectedIdx = 0;
-    static EditText idField, pwField, userName;
-    static ProgressDialog progresssBar;
+    int dropdownSelectedIdx = 0;
+    EditText idField, pwField, userName;
+    ProgressDialog progressBar;
 
     AlertDialog.Builder alertDialog;
     static String[] deptArr = {"기독교학부", "어문학부", "사회복지학부", "경찰학부", "경상학부", "관광학부", "사범학부",
@@ -68,9 +68,9 @@ public class Register extends AppCompatActivity {
         ArrayAdapter apapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, deptArr);
         spinner.setAdapter(apapter);
 
-        progresssBar = new ProgressDialog(this);
-        progresssBar.setMessage("로딩 중");
-        progresssBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar = new ProgressDialog(this);
+        progressBar.setMessage("로딩 중");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class Register extends AppCompatActivity {
                 }
                 else
                 {
-                    progresssBar.show();
+                    progressBar.show();
                     ContentValues values = new ContentValues();
                     values.put("id", id);
                     values.put("pw", pw);
@@ -120,7 +120,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                progresssBar.dismiss();
+                progressBar.dismiss();
             }
         });
     }
@@ -152,7 +152,7 @@ public class Register extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             // 결과에 따른 UI 수정
-            progresssBar.dismiss();
+            progressBar.dismiss();
             if(!result.isEmpty())
             {
                 try {

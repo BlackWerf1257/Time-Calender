@@ -6,6 +6,8 @@ import java.util.HashMap;
 public class SiteUrl {
     public static String RegisterUrl = "http://bwserver.dothome.co.kr/android_register.php";
     public static String LoginUrl = "http://bwserver.dothome.co.kr/Login.php";
+    public static String ScheduleUrl = "http://bwserver.dothome.co.kr/Schedule_Data.php";
+    public static String CalenderUrl = "http://bwserver.dothome.co.kr/Calender_Data.php";
 
     //사이버캠퍼스
     public static String cyberCampusUrl = "https://bctl.bu.ac.kr/";

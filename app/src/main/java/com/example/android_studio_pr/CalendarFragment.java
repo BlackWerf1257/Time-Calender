@@ -1,8 +1,11 @@
 package com.example.android_studio_pr;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,12 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +34,8 @@ public class CalendarFragment extends Fragment {
     private Map<String, String> timetableMap = new HashMap<>();
     private Map<String, Integer> colorMap = new HashMap<>();
     private Random random = new Random();
+    ProgressDialog progressBar;
+    AlertDialog.Builder alertDialog;
 
     @Nullable
     @Override
@@ -35,6 +44,13 @@ public class CalendarFragment extends Fragment {
         timetableGrid = view.findViewById(R.id.timetableGrid);
 
         populateTimetable();
+
+        progressBar = new ProgressDialog(getContext());
+        progressBar.setMessage("로딩 중");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
 
         return view;
     }
@@ -161,5 +177,59 @@ public class CalendarFragment extends Fragment {
         builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
 
         builder.show();
+    }
+
+
+    public class HttpUtil extends AsyncTask<Void, Void, String> {
+
+        String url;
+        ContentValues values;
+
+        HttpUtil(String url, ContentValues values) {
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //progress bar를 보여주는 등등의 행위
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            String result = requestHttpURLConnection.postRequest(url, values);
+            return result; // 아래 onPostExecute()의 파라미터로 전달됩니다.
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // 결과에 따른 UI 수정
+            progressBar.dismiss();
+            if(!result.isEmpty())
+            {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    result = jsonObject.getString("result");
+                    // 이제 'name' 변수를 사용할 수 있습니다.
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(result.equals("계정이 생성되었습니다"))
+                    alertDialog.setTitle(R.string.registerSucceed);
+                else
+                    alertDialog.setTitle(R.string.registerFailed);
+
+                alertDialog.setMessage(result);
+                alertDialog.show();
+            }
+            else{
+                alertDialog.setTitle(R.string.error);
+                alertDialog.setMessage(R.string.registerFailed);
+                alertDialog.show();
+            }
+        }
     }
 }

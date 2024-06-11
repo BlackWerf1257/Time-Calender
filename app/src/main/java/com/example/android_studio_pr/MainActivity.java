@@ -30,7 +30,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity {
-    static String loginResult, userName, deptName;
+    String loginResult, userName, deptName;
     AlertDialog.Builder alertDialog;
 
     @Override
