@@ -1,6 +1,7 @@
 package com.example.android_studio_pr;
 
 import android.app.AlertDialog;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -39,23 +40,37 @@ public class CalendarFragment extends Fragment {
     }
 
     private void populateTimetable() {
-        // 샘플 시간표 데이터
         String[][] timetable = {
-                {"", "안드로이드", "데이터통신", "컴퓨터구조", "웹프로그래밍", ""},
-                {"", "안드로이드", "데이터통신", "컴퓨터구조", "웹프로그래밍", ""},
-                {"", "안드로이드", "데이터통신", "컴퓨터구조", "웹프로그래밍", ""},
-                {"", "안드로이드", "데이터통신", "컴퓨터구조", "웹프로그래밍", ""},
-                {"", "안드로이드", "데이터통신", "컴퓨터구조", "웹프로그래밍", ""},
-                {"", "데이터베이스", "공업수학", "운영체제", "소프트웨어공학", ""},
-                {"", "데이터베이스", "공업수학", "운영체제", "소프트웨어공학", ""},
-                {"", "데이터베이스", "공업수학", "운영체제", "소프트웨어공학", ""},
-                {"", "데이터베이스", "공업수학", "운영체제", "소프트웨어공학", ""},
-                {"", "데이터베이스", "공업수학", "운영체제", "소프트웨어공학", ""},
+                {"", "", "", "", "", ""},
+                {"", "", "", "", "", ""},
+                {"", "", "", "", "", ""},
+                {"", "", "안드로이드 프로그래밍", "", "", ""},
+                {"", "", "안드로이드 프로그래밍", "", "", ""},
+                {"", "", "안드로이드 프로그래밍", "", "", ""},
+                {"", "", "", "", "", ""},
+                {"", "", "", "", "", ""},
+                {"", "", "", "", "", ""},
         };
 
-        String[] days = {"", "월", "화", "수", "목", "금"};
+        String[] days = {"", "    월    ", "    화    ", "    수    ", "    목    ", "    금   "};
+        String[] times = {"\n09:00\n", "\n10:00\n", "\n11:00\n", "\n12:00\n", "\n13:00\n", "\n14:00\n", "\n15:00\n", "\n16:00\n", "\n17:00\n"};
 
-        for (int col = 0; col < timetable[0].length; col++) {
+        Configuration configuration = getResources().getConfiguration();
+        if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            for (int i = 0; i < timetable.length; i++) {
+                for (int j = 0; j < timetable[i].length; j++) {
+                    timetable[i][j] = timetable[i][j].replace("\n", "");
+                }
+            }
+            for (int i = 0; i < times.length; i++) {
+                times[i] = times[i].replace("\n", "");
+            }
+            for (int i = 0; i < days.length; i++) {
+                days[i] = "         " + days[i] + "         ";
+            }
+        }
+
+        for (int col = 0; col < days.length; col++) {
             TextView dayTextView = new TextView(getActivity());
             dayTextView.setText(days[col]);
             dayTextView.setPadding(8, 8, 8, 8);
@@ -64,54 +79,53 @@ public class CalendarFragment extends Fragment {
             dayTextView.setGravity(Gravity.CENTER);
 
             GridLayout.LayoutParams dayParams = new GridLayout.LayoutParams();
-            dayParams.rowSpec = GridLayout.spec(0);
-            dayParams.columnSpec = GridLayout.spec(col);
+            dayParams.rowSpec = GridLayout.spec(0, 1f);
+            dayParams.columnSpec = GridLayout.spec(col, 1f);
             dayTextView.setLayoutParams(dayParams);
 
             timetableGrid.addView(dayTextView);
+        }
 
-            for (int row = 1; row < timetable.length; row++) {
-                if (col == 0) {
-                    String timeSlot = (8 + row) + ":00" ; // 시간대
-                    TextView timeTextView = new TextView(getActivity());
-                    timeTextView.setText(timeSlot);
-                    timeTextView.setPadding(8, 8, 8, 8);
-                    timeTextView.setBackgroundResource(R.color.colorAccent);
-                    timeTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    timeTextView.setGravity(Gravity.CENTER);
+        for (int row = 1; row <= times.length; row++) {
+            TextView timeTextView = new TextView(getActivity());
+            timeTextView.setText(times[row - 1]);
+            timeTextView.setPadding(8, 8, 8, 8);
+            timeTextView.setBackgroundResource(R.color.colorAccent);
+            timeTextView.setTextColor(getResources().getColor(android.R.color.white));
+            timeTextView.setGravity(Gravity.CENTER);
 
-                    GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-                    params.rowSpec = GridLayout.spec(row);
-                    params.columnSpec = GridLayout.spec(col);
-                    timeTextView.setLayoutParams(params);
+            GridLayout.LayoutParams timeParams = new GridLayout.LayoutParams();
+            timeParams.rowSpec = GridLayout.spec(row, 1f);
+            timeParams.columnSpec = GridLayout.spec(0, 1f);
+            timeTextView.setLayoutParams(timeParams);
 
-                    timetableGrid.addView(timeTextView);
-                } else {
-                    String text = timetable[row][col];
-                    TextView textView = new TextView(getActivity());
-                    textView.setText(text);
-                    textView.setPadding(8, 8, 8, 8);
-                    textView.setTextColor(getResources().getColor(android.R.color.white));
-                    textView.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL); // 텍스트를 아래로 정렬
+            timetableGrid.addView(timeTextView);
 
-                    if (!colorMap.containsKey(text)) {
-                        int color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-                        colorMap.put(text, color);
-                    }
+            for (int col = 1; col < days.length; col++) {
+                String text = timetable[row - 1][col - 1];
+                TextView textView = new TextView(getActivity());
+                textView.setText(text);
+                textView.setPadding(8, 8, 8, 8);
+                textView.setTextColor(getResources().getColor(android.R.color.white));
+                textView.setGravity(Gravity.CENTER);
 
-                    textView.setBackgroundColor(colorMap.get(text));
-
-                    int finalRow = row;
-                    int finalCol = col;
-                    textView.setOnClickListener(v -> showEditDialog(textView, finalRow, finalCol));
-
-                    GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-                    params.rowSpec = GridLayout.spec(row);
-                    params.columnSpec = GridLayout.spec(col);
-                    params.setGravity(Gravity.FILL); // TextView가 셀을 채우도록 설정
-                    textView.setLayoutParams(params);
-                    timetableGrid.addView(textView);
+                if (!colorMap.containsKey(text)) {
+                    int color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+                    colorMap.put(text, color);
                 }
+
+                textView.setBackgroundColor(colorMap.get(text));
+
+                int finalRow = row;
+                int finalCol = col;
+                textView.setOnClickListener(v -> showEditDialog(textView, finalRow, finalCol));
+
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.rowSpec = GridLayout.spec(row, 1f);
+                params.columnSpec = GridLayout.spec(col, 1f);
+                params.setGravity(Gravity.FILL);
+                textView.setLayoutParams(params);
+                timetableGrid.addView(textView);
             }
         }
     }
@@ -140,8 +154,8 @@ public class CalendarFragment extends Fragment {
             textView.setBackgroundColor(color);
 
             String key = row + "-" + col;
-            timetableMap.put(key, newClass);  // 시간표 데이터 업데이트
-            colorMap.put(newClass, color);  // 새로운 색상을 맵에 추가
+            timetableMap.put(key, newClass);
+            colorMap.put(newClass, color);
             Toast.makeText(getActivity(), "수업이 저장되었습니다", Toast.LENGTH_SHORT).show();
         });
         builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
