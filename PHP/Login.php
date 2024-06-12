@@ -2,7 +2,7 @@
     $id = $_POST["id"];
     $pw = $_POST["pw"];
 
-      $conn = new mysqli('localhost', 'bwserver', 'RePW2939!', 'bwserver')
+      $conn = new mysqli('localhost', '', '', '')
       or die("Connection Failed");
 
 
