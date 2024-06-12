@@ -2,6 +2,7 @@ package com.example.android_studio_pr;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -169,6 +170,12 @@ public class Register extends AppCompatActivity {
                     alertDialog.setTitle(R.string.registerFailed);
 
                 alertDialog.setMessage(result);
+                alertDialog.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
                 alertDialog.show();
             }
             else{

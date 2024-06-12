@@ -34,7 +34,6 @@ public class CalendarFragment extends Fragment {
     private Map<String, String> timetableMap = new HashMap<>();
     private Map<String, Integer> colorMap = new HashMap<>();
     private Random random = new Random();
-    ProgressDialog progressBar;
     AlertDialog.Builder alertDialog;
 
     @Nullable
@@ -44,16 +43,13 @@ public class CalendarFragment extends Fragment {
         timetableGrid = view.findViewById(R.id.timetableGrid);
 
         ContentValues values = new ContentValues();
-        values.put("userName", "AA");
+        values.put("userName", Dept_Announce.nameValue);
         values.put("needFetch", "true");
         CalendarFragment.HttpUtil task = new CalendarFragment.HttpUtil(SiteUrl.CalenderUrl, values);
         task.execute();
 
         populateTimetable();
 
-        progressBar = new ProgressDialog(getContext());
-        progressBar.setMessage("로딩 중");
-        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
@@ -212,15 +208,6 @@ public class CalendarFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             // 결과에 따른 UI 수정
-            progressBar.dismiss();
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                result = jsonObject.getString("result");
-
-                // 이제 'name' 변수를 사용할 수 있습니다.
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
             Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
         }
