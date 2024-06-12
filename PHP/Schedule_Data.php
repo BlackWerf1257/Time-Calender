@@ -4,7 +4,7 @@
       $isSendMode = $_POST["isSendMode"];
       $task = $_POST["task"];
 
-      $conn = new mysqli('localhost', 'bwserver', 'RePW2939!', 'bwserver')
+      $conn = new mysqli('localhost', '', '', '')
       or die("Connection Failed");
 
     if(!empty($userName) && !empty($isSendMode)){
