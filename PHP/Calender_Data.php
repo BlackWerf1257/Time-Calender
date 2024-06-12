@@ -7,7 +7,7 @@
 
 	
 
-      $conn = mysqli_connect('localhost', 'bwserver', 'RePW2939!', 'bwserver') or die("Connection Failed");
+      $conn = mysqli_connect('localhost', '', '', '') or die("Connection Failed");
       $connPrepare = mysqli_prepare($conn, "SELECT  doW, classOrder, subName FROM Calender Where UserName = '$userName' AND doW='$doW' AND classOrder='$classOrder';");
       mysqli_stmt_execute($connPrepare);
 	
