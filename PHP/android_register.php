@@ -5,19 +5,17 @@
       $deptName = $_POST["deptName"];
 
         //Server Address, Server Host ID, Server Host Password, Server DB name
-      $conn = new mysqli('', '', '', '')
-      or die("Connection Failed");
+        $conn = mysqli_connect('localhost', 'bwserver', 'RePW2939!', 'bwserver') or die("Connection Failed");
 
     if(!empty($id) && !empty($pw) && !empty($userName) && !empty($deptName)){
         $id_Sql = "SELECT * FROM Android_Register WHERE Id = '$id'";
         $id_response = mysqli_query($conn, $id_Sql)  or die('Failed to query database'.mysqli_error($conn));
-        $id_result = array();
 
         while($id_row = mysqli_fetch_array($id_response)){
         if($id_row[0] !== NULL)
             {
             $id_res["result"] = "ID가 중복입니다";
-            echo json_encode($id_res, JSON_UNESCAPED_UNICODE);
+            die(json_encode($id_res, JSON_UNESCAPED_UNICODE));
             }
         }
         
@@ -29,7 +27,7 @@
         if($userName_row[0] !== NULL)
             {
             $userName_res["result"] = "유저명이 중복입니다";
-            echo json_encode($userName_res, JSON_UNESCAPED_UNICODE);
+            die(json_encode($userName_res, JSON_UNESCAPED_UNICODE));
             }
         }
         
