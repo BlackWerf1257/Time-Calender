@@ -1,4 +1,4 @@
-# Android_Studio_Pr# Android_Studio_Pr
+# Android_Studio_Pr
 ## 한국어
 ### 소개 
 - 2024년 1학기 '안드로이드 프로그래밍' 과목에서 기말 프로젝트로 제작한 프로젝트입니다
