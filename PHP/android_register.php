@@ -5,7 +5,7 @@
       $deptName = $_POST["deptName"];
 
         //Server Address, Server Host ID, Server Host Password, Server DB name
-        $conn = mysqli_connect('localhost', 'bwserver', 'RePW2939!', 'bwserver') or die("Connection Failed");
+        $conn = mysqli_connect('localhost', '', '', '') or die("Connection Failed");
 
     if(!empty($id) && !empty($pw) && !empty($userName) && !empty($deptName)){
         $id_Sql = "SELECT * FROM Android_Register WHERE Id = '$id'";
