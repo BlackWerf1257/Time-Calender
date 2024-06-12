@@ -3,11 +3,13 @@ package com.example.android_studio_pr;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +33,10 @@ public class StudyManageFragment extends Fragment {
     boolean isTimerRunning = false;
     Ringtone ringtone;
     Vibrator vibrator;
+    MediaPlayer mediaPlayer;
 
     AlertDialog.Builder builder;
+    Handler handler = new Handler();
 
     @Nullable
     @Override
@@ -72,13 +76,12 @@ public class StudyManageFragment extends Fragment {
                 builder.setTitle("경고")
                         .setMessage("시간을 입력해주세요");
                 builder.show();
-
                 return;
             }
 
             String[] timeArray = input.split(":");
             if (timeArray.length != 2) {
-                Toast.makeText(getActivity(), "Please enter time in the format of '분:초'", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "'분:초'", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -87,6 +90,17 @@ public class StudyManageFragment extends Fragment {
 
             // 분과 초를 밀리초로 변환
             long millisInput = (minutes * 60 + seconds) * 1000;
+
+            // Handler로 입력 시간의 절반에 실행될 코드를 설정
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // 실행할 코드
+                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.timevoice);
+                    mediaPlayer.start();
+                    Toast.makeText(getActivity(), "절반의 시간이 지났습니다. 남은 시간 열심히 집중 하세요!", Toast.LENGTH_SHORT).show();
+                }
+            }, millisInput / 2);
 
             countDownTimer = new CountDownTimer(millisInput, 1000) {
                 @Override
@@ -111,6 +125,7 @@ public class StudyManageFragment extends Fragment {
     private void stopTimer() {
         if (isTimerRunning) {
             countDownTimer.cancel();
+            handler.removeCallbacksAndMessages(null); // 모든 예약된 실행 제거
             if (ringtone != null && ringtone.isPlaying()) {
                 ringtone.stop();
             }
@@ -155,7 +170,6 @@ public class StudyManageFragment extends Fragment {
         }
 
         // 알림 창 표시
-
         builder.setTitle("시간 경과")
                 .setMessage("설정한 시간이 지났습니다")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

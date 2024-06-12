@@ -1,6 +1,9 @@
 package com.example.android_studio_pr;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -9,12 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +31,9 @@ public class ScheduleFragment extends Fragment {
     private TextView memoTextView;
     private Button viewMemoButton;
     private Button editMemoButton;
-    private Map<String, String> memoMap = new HashMap<>();
+    String queryDate;
     private String selectedDate;
+    String tmpTask; //해당 날짜의 작업 임시 저장용
     AlertDialog.Builder alertDialog;
 
     @Nullable
@@ -40,7 +48,6 @@ public class ScheduleFragment extends Fragment {
 
 
         alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(R.string.error);
         alertDialog.setIcon(android.R.drawable.ic_lock_idle_alarm);
 
 
@@ -48,72 +55,118 @@ public class ScheduleFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 selectedDate = year + "년 " + (month + 1) + "월 " + dayOfMonth + "일 메모 내용 ★";
+                queryDate = year + "-" + (month + 1) + "-" + dayOfMonth;
+                Toast.makeText(getContext(), queryDate, Toast.LENGTH_SHORT).show();
             }
         });
 
         viewMemoButton.setOnClickListener(v -> {
-            if (selectedDate != null) {
-                updateMemoTextView(selectedDate);
-            } else {
-                Toast.makeText(getActivity(), "날짜를 선택하세요", Toast.LENGTH_SHORT).show();
+            if (selectedDate != null)
+                MemoTextViewEvent("false");
+            else {
+                alertDialog.setTitle(R.string.error);
+                alertDialog.setMessage("날짜를 선택하세요");
+                alertDialog.show();
             }
         });
 
         editMemoButton.setOnClickListener(v -> {
-            if (selectedDate != null) {
-                String memo = memoMap.get(selectedDate);
-                if (memo != null) {
-                    showEditMemoDialog(selectedDate, memo);
-                } else {
-                    showAddMemoDialog(selectedDate);
-                }
-            } else {
-                Toast.makeText(getActivity(), "날짜를 선택하세요", Toast.LENGTH_SHORT).show();
+            if (selectedDate != null)
+            {
+                AlertDialog.Builder editAlert = new AlertDialog.Builder(getContext());
+                editAlert.setTitle("일정 추가");
+                final EditText input = new EditText(getActivity());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                editAlert.setView(input);
+                editAlert.setPositiveButton("추가", ((dialog, which) -> {
+                    tmpTask = input.getText().toString();
+                    MemoTextViewEvent("true");
+                }));
+                editAlert.setNegativeButton("취소", ((dialog, which) -> {}));
+                editAlert.show();
+            }
+            else {
+                alertDialog.setTitle(R.string.error);
+                alertDialog.setMessage("날짜를 선택하세요");
+                alertDialog.show();
             }
         });
 
         return view;
     }
 
-    private void showAddMemoDialog(final String selectedDate) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("메모 추가");
-        final EditText input = new EditText(getActivity());
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-        builder.setPositiveButton("추가", (dialog, which) -> {
-            String memoContent = input.getText().toString();
-            memoMap.put(selectedDate, memoContent);
-            updateMemoTextView(selectedDate);
-            Toast.makeText(getActivity(), "일정 추가", Toast.LENGTH_SHORT).show();
-        });
-        builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
-        builder.show();
+
+    //true: 데이터설정 false: 데이터 가져오기
+    private void MemoTextViewEvent(String isSet) {
+        ContentValues values = new ContentValues();
+        values.put("userName", Dept_Announce.nameValue);
+        values.put("date", queryDate);
+        values.put("isSendMode", isSet);
+        if(tmpTask == null)
+            values.put("task", "");
+        else
+            values.put("task", tmpTask);
+        ScheduleFragment.HttpUtil netTask = new ScheduleFragment.HttpUtil(SiteUrl.ScheduleUrl, values);
+        netTask.execute();
     }
 
-    private void showEditMemoDialog(final String selectedDate, String memo) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("메모 수정");
-        final EditText input = new EditText(getActivity());
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setText(memo);
-        builder.setView(input);
-        builder.setPositiveButton("저장", (dialog, which) -> {
-            String memoContent = input.getText().toString();
-            memoMap.put(selectedDate, memoContent);
-            updateMemoTextView(selectedDate);
-            Toast.makeText(getActivity(), "메모 변경", Toast.LENGTH_SHORT).show();
-        });
-        builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
-        builder.show();
-    }
 
-    private void updateMemoTextView(String selectedDate) {
-        String memo = memoMap.get(selectedDate);
-        if (memo != null) {
-            memoTextView.setText(selectedDate + "\n\n " + memo);
-        } else {
-            memoTextView.setText("메모가 여기에 표시됩니다.");
+    public class HttpUtil extends AsyncTask<Void, Void, String> {
+
+        String url;
+        ContentValues values;
+
+        HttpUtil(String url, ContentValues values) {
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //progress bar를 보여주는 등등의 행위
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            String result = requestHttpURLConnection.postRequest(url, values);
+            return result; // 아래 onPostExecute()의 파라미터로 전달됩니다.
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            String date = null;
+            String task = null;
+            // 결과에 따른 UI 수정
+            if(!result.isEmpty())
+            {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    result = jsonObject.getString("result");
+                    date = jsonObject.getString("date");
+                    task = jsonObject.getString("task");
+
+                    // 이제 'name' 변수를 사용할 수 있습니다.
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(result.equals("성공"))
+                    alertDialog.setTitle(R.string.succeed);
+                else if(result.equals("실패"))
+                    alertDialog.setTitle(R.string.error);
+
+                String data = date + "\n" + task;
+                memoTextView.setText(data);
+                alertDialog.setMessage(result);
+                alertDialog.show();
+            }
+            else{
+                alertDialog.setTitle(R.string.error);
+                alertDialog.setMessage(result);
+                alertDialog.show();
+            }
         }
     }
 }
